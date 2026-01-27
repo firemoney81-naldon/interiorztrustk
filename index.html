@@ -1,23 +1,621 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <!-- JSON-LD Structured Data for Interior Design Service -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "인테리어견적비교사이트",
+      "url": "https://yourdomain.com",
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "인테리어 전문 비교 플랫폼",
+        "url": "https://yourdomain.com"
+      },
+      "description": "합리적인 인테리어 비용과 투명한 견적을 제공하는 인테리어 견적 비교 사이트입니다. 고객님의 소중한 주거 공간을 안전하고 아름답게 변화시켜 드립니다. 아파트, 주택 리모델링 전문.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "인테리어 서비스 종류",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "아파트 전체 리모델링"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "15000000",
+              "priceCurrency": "KRW",
+              "description": "주방, 욕실, 거실, 방 전체 철거 및 재시공. 20평대 기준 시작가"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "주방/욕실 부분 리모델링"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "3000000",
+              "priceCurrency": "KRW",
+              "description": "부분 인테리어 서비스. 주방 싱크대 교체, 욕실 타일 및 위생도기 교체"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "상업 공간 인테리어"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "20000000",
+              "priceCurrency": "KRW",
+              "description": "카페, 사무실, 상가 등 상업 시설 맞춤형 인테리어"
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Styles */
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      background-color: #f8fbfd; /* Very light blue background */
+      color: #333;
+      word-break: keep-all; /* Korean word wrapping */
+      font-size: 16px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: #004d99; /* Deep blue header */
+      color: white;
+      padding: 3rem 1rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 0.5rem 0 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    header p {
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 300;
+      color: #e6f2ff;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #003366; /* Slightly darker nav bar */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 5px 0;
+    }
+    nav a:hover {
+      color: #ffc107; /* Bright yellow on hover */
+      transform: translateY(-2px);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: #ffc107;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Main Content Area */
+    main {
+      max-width: 1000px;
+      margin: 2.5rem auto;
+      padding: 2rem;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      color: #003366; /* Dark navy blue */
+      font-weight: 700;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-bottom: 3px solid #e0f0ff;
+    }
+    h2 { font-size: 2.2rem; margin-top: 3rem; }
+    h3 { font-size: 1.7rem; color: #004d99; margin-top: 2rem; }
+    p { text-align: justify; margin-bottom: 1.5rem; }
+    strong { color: #004d99; font-weight: 700; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background-color: white;
+    }
+    th, td {
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      text-align: left;
+    }
+    th {
+      background-color: #004d99;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    tr:nth-child(even) { background-color: #f8f8f8; }
+    td strong { display: block; margin-bottom: 0.5rem; color: #003366; }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      background-color: #ff6600; /* Orange CTA color */
+      color: white;
+      font-weight: 700;
+      padding: 1.2rem 3.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      margin: 2rem 0;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-align: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border: none;
+      cursor: pointer;
+    }
+    .cta-button:hover {
+      background-color: #e65c00;
+      transform: translateY(-2px);
+    }
+
+    /* Keyword Tags */
+    .keyword-tags {
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      border-top: 2px solid #f0f0f0;
+      padding-top: 2rem;
+    }
+    .keyword-tags a {
+      background-color: #e0f0ff;
+      color: #0066cc;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: 1px solid #cceeff;
+    }
+    .keyword-tags a:hover {
+      background-color: #b3d1ff;
+      transform: scale(1.05);
+    }
+
+    /* FAQ Accordion */
+    dl dt {
+      font-weight: 700;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      color: #0066cc;
+      background-color: #f5fafd;
+      padding: 1.2rem;
+      border-left: 5px solid #0066cc;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+    dl dt:hover { background-color: #e6f2ff; }
+    dl dd {
+      margin: 0.5rem 0 1.5rem 1rem;
+      padding: 1.5rem;
+      border-left: 2px dashed #ccc;
+      background-color: #fbfdff;
+      display: none;
+      font-size: 0.95rem;
+    }
+    dl dt.active + dd { display: block; }
+    dl dt::after {
+        content: '+';
+        position: absolute;
+        right: 1rem;
+        font-size: 1.5rem;
+        transition: transform 0.3s;
+    }
+    dl dt.active::after { content: '-'; transform: rotate(0deg); }
+
+    /* Forms Section */
+    .form-section {
+      background-color: #f5fafd;
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #e0eaf1;
+      margin-top: 3rem;
+    }
+    .form-section label {
+      display: block;
+      margin-top: 1.5rem;
+      font-weight: 700;
+      color: #003366;
+      font-size: 1.1rem;
+    }
+    .form-section input[type="text"],
+    .form-section input[type="number"],
+    .form-section select,
+    .form-section textarea {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      background-color: white;
+    }
+    .form-section textarea { height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e0eaf1;
+      margin-top: 3rem;
+      border-top: 1px solid #d0dbe4;
+    }
+
+    /* Chart/Graph Simulation (CSS) */
+    .chart-container {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: #fbfdff;
+      border-radius: 8px;
+      border: 1px solid #e0eaf1;
+    }
+    .bar-chart {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .bar-item {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      position: relative;
+    }
+    .bar-label {
+      font-weight: 700;
+      margin-right: 10px;
+      width: 120px;
+      text-align: left;
+      color: #333;
+      font-size: 0.9rem;
+      padding-left: 10px;
+    }
+    .bar-fill {
+      height: 100%;
+      background-color: #0066cc;
+      border-radius: 4px;
+      transition: width 1s ease-out;
+      position: relative;
+    }
+    .bar-value {
+      position: absolute;
+      right: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+      line-height: 30px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      nav ul { gap: 1.5rem; }
+      nav a { font-size: 1rem; }
+      main { padding: 1.5rem; margin: 1.5rem auto; }
+      h2 { font-size: 1.8rem; }
+      h3 { font-size: 1.4rem; }
+      .bar-item { flex-direction: column; height: auto; align-items: flex-start; }
+      .bar-label { width: auto; text-align: left; margin-bottom: 5px; }
+      .bar-fill { height: 20px; width: 100% !important; }
+      .bar-value { position: static; text-align: left; margin-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>인테리어 견적 비교 사이트 - 투명하고 합리적인 인테리어 비용 확인</h1>
+    <p>아파트, 주택 리모델링 전문! 2026년 최신 인테리어 트렌드와 비용 분석</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#서비스소개">서비스 소개</a></li>
+      <li><a href="#비용분석">비용 분석</a></li>
+      <li><a href="#견적비교절차">견적 비교 절차</a></li>
+      <li><a href="#시공팁">성공 시공 팁</a></li>
+      <li><a href="#자주묻는질문">자주 묻는 질문</a></li>
+      <li><a href="#무료견적신청">무료 견적 신청</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="서비스소개">
+      <h2>인테리어 견적 비교 서비스 소개</h2>
+      <p>저희 **인테리어견적비교사이트**는 복잡하고 불투명한 인테리어 시장에서 고객님이 합리적인 **인테리어 비용**으로 만족스러운 결과를 얻을 수 있도록 돕는 전문 플랫폼입니다. 인테리어는 주거 공간의 가치와 삶의 질을 결정하는 중요한 투자임에도 불구하고, 업체별 **견적 가격** 차이가 크고 **추가 비용** 발생에 대한 우려가 높아 소비자들이 많은 어려움을 겪습니다. 저희는 이러한 문제점을 해결하기 위해 **전국**의 신뢰할 수 있는 **인테리어 업체**들을 엄선하여 고객님의 조건에 맞는 **최저가 견적**과 **최고 품질**을 동시에 제공하고자 노력합니다.</p>
+
+      <h3>왜 인테리어 견적 비교가 필수인가요?</h3>
+      <p>인테리어 프로젝트의 **평균 비용**은 수백만 원에서 수천만 원에 이르며, 작은 부분의 변화에도 **견적 금액**이 크게 달라질 수 있습니다. **인테리어 업체 추천**을 받았더라도, 업체마다 전문 분야가 다르고 사용하는 자재의 등급이 천차만별입니다. 특히 **아파트 인테리어**나 **주택 리모델링**의 경우, 철거 및 구조 변경, 창호 교체 등 전문적인 작업이 많아 꼼꼼한 **비용 분석**이 필수입니다. 저희 **견적 비교 사이트**를 이용하시면, 여러 업체의 **인테리어 견적**을 투명하게 비교하여 불필요한 지출을 줄이고 **가성비 좋은 인테리어**를 선택할 수 있습니다. 예를 들어, **서울**이나 **강남** 지역처럼 인건비가 높은 곳에서도 합리적인 **견적**을 받을 수 있도록 제휴 업체 네트워크를 구축하고 있습니다.</p>
+
+      <div class="keyword-tags" aria-label="연관 검색 키워드">
+        <a href="#비용분석">인테리어 견적</a>
+        <a href="#시공팁">아파트 인테리어</a>
+        <a href="#견적비교절차">인테리어 업체 추천</a>
+        <a href="#비용분석">인테리어 비용</a>
+        <a href="#비용분석">평당 가격</a>
+        <a href="#견적비교절차">리모델링 견적</a>
+        <a href="#시공팁">인테리어 잘하는 곳</a>
+        <a href="#서비스소개">주택 리모델링</a>
+        <a href="#서비스소개">부분 인테리어</a>
+        <a href="#시공팁">인테리어 사기</a>
+        <a href="#비용분석">셀프 인테리어 비용</a>
+        <a href="#시공팁">인테리어 체크리스트</a>
+        <a href="#자주묻는질문">인테리어 AS</a>
+        <a href="#서비스소개">주방 인테리어</a>
+      </div>
+    </section>
+
+    <section id="비용분석">
+      <h2>인테리어 비용 상세 분석 및 견적 산출 요소</h2>
+      <p>인테리어 **견적 금액**은 크게 자재비, 인건비, 부가세, 그리고 업체의 이윤으로 구성됩니다. 이 네 가지 요소 중 어느 하나라도 과도하게 책정되면 **인테리어 비용**은 급증하게 됩니다. 특히 **아파트 리모델링**의 경우, 짐이 있는 상태에서 진행하는지(재실 시공) 여부, 철거 범위, 자재 등급, 작업 인원 수 등 수많은 변수에 따라 **견적**이 달라집니다. 저희 플랫폼은 이러한 복잡한 구조를 투명하게 분석하여 고객님께 합리적인 **비용**을 제안합니다.</p>
+
+      <h3>인테리어 평당 평균 비용 (2026년 기준)</h3>
+      <p>인테리어 **평당 비용**은 업체의 규모나 지역(예: **부산, 대구, 대전, 광주** 등의 광역시는 **서울, 경기** 지역에 비해 상대적으로 낮은 인건비가 적용될 수 있습니다)에 따라 달라지며, 사용하는 자재의 등급에 따라 **견적**이 크게 변동될 수 있습니다. 다음은 2026년 기준 20평대 **아파트 전체 리모델링**에 대한 평균 **평당 가격**을 바탕으로 한 예상 **금액**입니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>인테리어 수준</th>
+            <th>평당 예상 금액</th>
+            <th>총 예상 비용 (20평대 기준)</th>
+            <th>주요 서비스 특징</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>가성비/실속형</strong></td>
+            <td><strong>평당 80만원 ~ 120만원</strong></td>
+            <td><strong>1,600만원 ~ 2,400만원</strong></td>
+            <td>부분 교체 위주, 기본 자재(벽지, 장판 등) 사용, 최소한의 디자인.</td>
+          </tr>
+          <tr>
+            <td><strong>표준/일반형</strong></td>
+            <td><strong>평당 130만원 ~ 180만원</strong></td>
+            <td><strong>2,600만원 ~ 3,600만원</strong></td>
+            <td>전체 리모델링(주방, 욕실 포함), 중급 자재 사용, 맞춤 디자인 적용.</td>
+          </tr>
+          <tr>
+            <td><strong>고급/프리미엄</strong></td>
+            <td><strong>평당 200만원 이상</strong></td>
+            <td><strong>4,000만원 이상</strong></td>
+            <td>고급 수입 자재 사용, 맞춤 제작 가구, 첨단 스마트홈 시스템 적용.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>인테리어 비용 산출의 핵심 요소 분석 (자재비 vs 인건비)</h3>
+      <p>**인테리어 비용**의 가장 큰 비중을 차지하는 것은 **인건비**와 **자재비**입니다. **인건비**는 시공 기간, 작업 인원의 숙련도, 지역에 따라 달라집니다. **자재비**는 선택하는 제품의 브랜드, 등급, 원산지에 따라 **견적 차이**가 발생합니다. 예를 들어, **욕실 인테리어** 시 국산 타일과 유럽산 타일은 **비용**이 2~3배 이상 차이 날 수 있습니다. **주방 인테리어**의 경우, 싱크대 상판의 재질(인조대리석 vs 세라믹)과 주방 가전 빌트인 여부가 **견적**에 큰 영향을 미칩니다.</p>
+
+      <div class="chart-container">
+        <h3>인테리어 비용 구성 요소 (예시)</h3>
+        <p>일반적인 아파트 전체 리모델링 프로젝트의 **견적** 구성 비율입니다. 이 비율은 프로젝트 범위에 따라 달라질 수 있습니다.</p>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <span class="bar-label">자재비 (Materials)</span>
+            <div class="bar-fill" style="width: 45%;"><span class="bar-value">45%</span></div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">인건비 (Labor)</span>
+            <div class="bar-fill" style="width: 35%; background-color: #28a745;"><span class="bar-value">35%</span></div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">간접비/경비 (Overhead)</span>
+            <div class="bar-fill" style="width: 10%; background-color: #ffc107;"><span class="bar-value">10%</span></div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">업체 이윤 (Profit)</span>
+            <div class="bar-fill" style="width: 10%; background-color: #dc3545;"><span class="bar-value">10%</span></div>
+          </div>
+        </div>
+      </div>
+      <p>이러한 복잡한 **비용** 구조 때문에 **인테리어 견적 비교**는 필수적입니다. 저희 플랫폼은 **부천, 일산, 수원, 용인** 등 **경기 지역**을 포함한 전국 **인테리어 업체**들의 **평당 가격**을 비교하여 고객님께 최적의 솔루션을 제공합니다.</p>
+    </section>
+
+    <section id="견적비교절차">
+      <h2>투명한 인테리어 견적 비교 절차</h2>
+      <p>**인테리어견적비교사이트**를 통한 **견적 비교**는 다음과 같은 체계적인 4단계로 진행됩니다. 고객님은 복잡한 **견적** 과정을 전문가의 도움을 받아 쉽고 편리하게 진행할 수 있습니다. 저희는 **내돈내산** 후기를 바탕으로 신뢰할 수 있는 **인테리어 업체**만을 제휴하고 있습니다.</p>
+
+      <h3>1. 무료 견적 요청 및 1차 상담</h3>
+      <p>홈페이지의 견적 신청 양식을 통해 고객님의 **인테리어** 희망 사항을 간단하게 입력해 주시면 됩니다. **아파트 인테리어**인지, **주택 리모델링**인지, 혹은 **주방**이나 **욕실**과 같은 **부분 인테리어**인지 명확히 해주세요. 원하는 시공 지역(예: **인천, 세종, 청주, 제주** 등)과 평수를 입력하면, 전문 상담사가 연락을 드려 상세한 1차 상담을 진행합니다. 이 단계에서 고객님의 예산 범위와 원하는 디자인 컨셉, 시공 일정을 조율합니다.</p>
+
+      <h3>2. 맞춤형 업체 매칭 및 방문 견적</h3>
+      <p>상담 내용을 바탕으로 고객님의 요구사항에 가장 적합한 **인테리어 업체** 3~4곳을 선정하여 매칭해 드립니다. 선정된 업체들은 모두 **투명한 견적** 제공과 **A/S 보장**이 확실한 곳들입니다. 각 업체는 고객님 댁으로 직접 **방문 견적**을 위해 방문합니다. 이 과정에서 **현장 실측**을 통해 정확한 짐의 양, 구조, 노후도, 특수 시공 여부(확장 공사, 설비 변경 등)를 확인합니다. **방문 견적**은 정확한 **인테리어 견적**을 산출하는 데 있어 가장 중요한 단계이므로 반드시 여러 업체의 **견적**을 비교해야 합니다.</p>
+
+      <h3>3. 견적 비교 및 계약 체결</h3>
+      <p>여러 업체로부터 받은 **인테리어 견적서**를 비교 분석합니다. 단순한 **금액** 비교뿐만 아니라, **견적서**에 포함된 **자재비**와 **인건비**의 상세 내역, 시공 기간, **A/S 보증 기간** 등을 꼼꼼하게 대조합니다. 저희 플랫폼은 **견적서** 항목별 비교 분석 서비스를 제공하여 고객님이 합리적인 선택을 할 수 있도록 돕습니다. 최종적으로 가장 신뢰가 가는 업체와 계약을 체결합니다. **계약서**에는 시공 범위, **추가 비용** 발생 조건, **하자 보수** 규정 등을 명확히 명시해야 합니다. **인테리어 사기**를 예방하기 위해 구두 계약은 절대 피해야 합니다.</p>
+
+      <h3>4. 시공 진행 및 사후 관리</h3>
+      <p>계약된 일정에 따라 **인테리어 시공**이 진행됩니다. 저희는 시공 과정 중에도 고객님의 만족도를 높이기 위해 지속적으로 소통하며, 시공 완료 후에는 **하자 보수** 기간 동안 발생할 수 있는 문제에 대해 책임지고 사후 관리를 지원합니다. **AS 기간**은 업체마다 다르지만, 최소 1년 이상의 보증 기간을 확인해야 합니다. 시공 후에도 **내돈내산 후기**를 작성하여 다른 고객님들과 정보를 공유할 수 있습니다.</p>
+    </section>
+
+    <section id="시공팁">
+      <h2>성공적인 인테리어 시공을 위한 핵심 팁 및 사기 방지 요령</h2>
+      <p>**인테리어 견적**을 받는 것만큼 중요한 것이 **시공** 과정에서의 문제점을 예방하는 것입니다. 다음은 **인테리어** 경험자들이 강조하는 성공적인 **리모델링**을 위한 필수 팁입니다.</p>
+
+      <h3>1. '반드시' 관허업체(사업자등록증 확인)를 선택하세요.</h3>
+      <p>**인테리어 업체**를 선정할 때 가장 먼저 확인해야 할 것은 **사업자등록증**입니다. 정식으로 등록된 업체만이 **하자 보수 이행 보증** 및 **배상 책임 보험**에 가입할 수 있습니다. 무등록 업체와 계약할 경우, 시공 중 문제 발생 시 **피해 보상**을 받기 어렵습니다. **한국소비자원** 홈페이지 등을 통해 정식 사업자인지, 과거 소비자 피해 사례는 없는지 확인해 보세요.</p>
+      <a href="https://www.kca.go.kr/home/main.do" target="_blank" rel="noopener noreferrer" class="external-link">한국소비자원 홈페이지 (인테리어 소비자 피해 예방 정보)</a>
+
+      <h3>2. 계약서에 '추가 비용' 항목을 명확히 명시하세요.</h3>
+      <p>많은 **인테리어 사기**가 **추가 비용** 문제에서 발생합니다. **견적서**에는 포함되어 있지 않던 항목에 대해 시공 도중 **추가 금액**을 요구하는 경우가 많습니다. 이를 방지하기 위해 **계약서** 작성 시, 시공 범위와 **추가 비용 발생 조건**을 명확하게 규정해야 합니다. 예를 들어, “시공 중 예상치 못한 추가 작업(예: 누수 발견) 발생 시, 반드시 고객과 협의 후 서면으로 승인받는다” 등의 문구를 삽입하는 것이 좋습니다. **공정거래위원회**의 표준약관을 참고하여 계약서를 작성하는 것이 가장 안전합니다.</p>
+      <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=230635&efYd=20200805#0000" target="_blank" rel="noopener noreferrer" class="external-link">공정거래위원회 인테리어 시공 표준약관 (법제처)</a>
+
+      <h3>3. 자재 명세서를 상세히 확인하고, 직접 선택하세요.</h3>
+      <p>**인테리어 견적**에서 **자재비**는 전체 **비용**의 절반 가까이를 차지합니다. **견적서**에 '일반형 타일', '보급형 벽지' 등으로 모호하게 기재되어 있다면, 시공 업체가 저가 자재를 사용하여 **마진**을 높일 가능성이 있습니다. **견적서**를 받을 때 반드시 자재의 **브랜드**, **모델명**, **등급** 등을 상세히 기재하도록 요구해야 합니다. 가능하다면 고객이 직접 자재 매장을 방문하여 자재를 선택하고, **업체 가격**과 비교해 보는 것이 좋습니다. **인테리어 비용 절약**의 핵심은 자재 선택에 달려 있습니다.</p>
+      <a href="https://www.kiid.or.kr/" target="_blank" rel="noopener noreferrer" class="external-link">한국실내건축가협회 (KAID)</a>
+
+      <h3>4. 인테리어 전문 용어를 미리 숙지하세요.</h3>
+      <p>**인테리어** 용어는 일반인에게 생소한 경우가 많아 **견적** 상담 시 어려움을 겪을 수 있습니다. '목공', '철거', '설비', '전기', '타일', '도배' 등 각 공정별로 필요한 작업이 무엇인지 미리 알아두면 **업체**와의 소통이 원활해집니다. 또한, **인테리어 비용**을 절약하기 위한 방법으로 '반셀프 인테리어'를 고려할 수 있습니다. 이는 **도배**나 **장판** 등 일부 공정을 직접 발품 팔아 진행하고, 전문 시공은 **업체**에 맡기는 방식입니다. 시간과 노력이 필요하지만, **견적 금액**을 20% 이상 절감할 수 있는 좋은 방법입니다.</p>
+      <a href="https://namu.wiki/w/%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4" target="_blank" rel="noopener noreferrer" class="external-link">나무위키 - 인테리어 관련 정보</a>
+
+      <h3>5. 이웃 주민과의 관계를 고려하여 시공 일정을 잡으세요.</h3>
+      <p>**아파트 인테리어** 시 발생하는 소음과 분진은 이웃에게 큰 피해를 줄 수 있습니다. 시공 시작 전 반드시 관리사무소에 **인테리어 신고**를 하고, 엘리베이터 사용료 납부, 동의서 징구 등 필수 절차를 거쳐야 합니다. **서울**, **분당**, **판교** 등 주거 밀집 지역에서는 특히 이웃과의 분쟁이 잦으므로, 관리규약을 준수하는 것이 중요합니다. 시공 시작 전 양해를 구하는 인사를 드리면 시공 과정에서 발생할 수 있는 마찰을 줄일 수 있습니다.</p>
+    </section>
+
+    <section id="자주묻는질문">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인테리어 견적 비교를 하면 무조건 가장 싼 곳을 선택해야 하나요?</strong></dt>
+        <dd>저렴한 **인테리어 비용**이 무조건 좋은 것은 아닙니다. **인테리어 견적** 비교의 목적은 단순한 **가격** 비교가 아니라, 같은 **금액**이라도 어떤 자재를 사용하고 어떤 시공 방식을 적용하는지 비교하여 **가성비**를 높이는 것입니다. 터무니없이 저렴한 **견적**은 부실 시공이나 **추가 비용**을 유발할 수 있으므로, **인테리어 업체 추천** 시 **내돈내산 후기**와 **A/S 보장 여부**를 반드시 함께 확인해야 합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 아파트 인테리어 시공 기간은 얼마나 걸리나요?</strong></dt>
+        <dd>**아파트 인테리어 시공 기간**은 평수와 작업 범위에 따라 달라집니다. 20평대 **부분 인테리어** (예: 주방, 욕실만 교체)는 보통 1~2주 소요되며, **전체 리모델링**은 3~4주가 일반적입니다. 40평 이상의 대형 평수 **리모델링**은 5주 이상이 소요될 수 있습니다. **인테리어 견적** 상담 시 **업체**와 정확한 **시공 일정**을 협의하여 미리 계획을 세우는 것이 중요합니다. **이사 일정**과 맞물려 시공 기간이 지연되지 않도록 여유 있게 일정을 잡는 것을 추천합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인테리어 시공 후 하자가 발생하면 어떻게 해야 하나요?</strong></dt>
+        <dd>대부분의 신뢰할 수 있는 **인테리어 업체**는 **하자 보수** 기간(A/S 기간)을 명시하고 있습니다. 보통 1년에서 2년까지 시공 부위별로 보증 기간이 적용됩니다. **하자** 발생 시 즉시 **업체**에 연락하여 **A/S**를 요청해야 합니다. 만약 **업체**가 연락이 두절되거나 보수를 거부하는 경우, **한국소비자원**의 소비자 분쟁 해결 기준에 따라 조정 신청을 할 수 있습니다. 계약서에 명시된 **하자 보수 규정**을 다시 한번 확인해 주세요.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인테리어 업체와 계약할 때 어떤 점을 유의해야 하나요?</strong></dt>
+        <dd>가장 중요한 것은 **견적 금액**의 투명성입니다. **견적서**에 **추가 비용** 발생 조건, **A/S 기간**, 시공 자재의 상세 명세, 공사 기간이 명시되어 있는지 확인하세요. 또한, 계약서에 **인테리어 배상 책임 보험** 가입 여부와 **보증 기간**을 명시하도록 요구하는 것이 안전합니다. **인테리어 비용**의 지불은 계약금, 중도금, 잔금으로 나누어 진행하고, 잔금은 모든 **시공**이 완료되고 **하자**가 없는 것을 확인한 후에 지급하는 것이 좋습니다. **광주**, **제주** 등 지방 지역에서도 **인테리어 사기** 사례가 발생하므로 지역을 불문하고 꼼꼼한 확인이 필요합니다.</dd>
+      </dl>
+    </section>
+
+    <section id="무료견적신청">
+      <h2>인테리어 견적 무료 신청하기</h2>
+      <p>복잡하고 어려운 **인테리어 견적 비교**, 이제 **포장이사견적사이트**에서 한 번에 해결하세요. **서울**, **부산**, **인천**, **대구** 등 전국 어디든 신뢰할 수 있는 **인테리어 업체**들을 매칭하여 합리적인 **비용**으로 최고의 결과를 약속합니다. 지금 바로 무료 견적을 신청하고 고객님의 꿈꾸는 공간을 현실로 만드세요.</p>
+
+      <div class="form-section">
+        <h3>인테리어 견적 신청서 작성 (1분이면 충분!)</h3>
+        <p>아래 정보를 입력해 주시면 전문 상담사가 확인 후 맞춤 견적을 제공해 드립니다. 견적 문의는 무료입니다.</p>
+
+        <form action="#" method="post">
+          <label for="name">이름:</label>
+          <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요." required>
+
+          <label for="phone">연락처:</label>
+          <input type="text" id="phone" name="phone" placeholder="예: 010-1234-5678" required>
+
+          <label for="area">이사/시공 지역:</label>
+          <select id="area" name="area" required>
+            <option value="">지역을 선택해주세요.</option>
+            <option value="서울">서울</option>
+            <option value="경기">경기 (수원, 용인, 성남, 부천 등)</option>
+            <option value="인천">인천</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="대전">대전</option>
+            <option value="광주">광주</option>
+            <option value="울산">울산</option>
+            <option value="세종">세종</option>
+            <option value="강원">강원</option>
+            <option value="충북">충북 (청주, 천안 등)</option>
+            <option value="충남">충남</option>
+            <option value="경북">경북</option>
+            <option value="경남">경남</option>
+            <option value="전북">전북</option>
+            <option value="전남">전남</option>
+            <option value="제주">제주</option>
+            <option value="기타">기타</option>
+          </select>
+
+          <label for="type">시공 유형:</label>
+          <select id="type" name="type" required>
+            <option value="">시공 유형을 선택해주세요.</option>
+            <option value="전체리모델링">아파트 전체 리모델링</option>
+            <option value="부분인테리어">부분 인테리어 (주방/욕실 등)</option>
+            <option value="상업공간">상업 공간 인테리어</option>
+            <option value="사무실">사무실 인테리어</option>
+            <option value="기타">기타</option>
+          </select>
+
+          <label for="size">평수:</label>
+          <input type="number" id="size" name="size" placeholder="예: 30 (평)" required>
+
+          <label for="date">시공 희망 시기:</label>
+          <input type="text" id="date" name="date" placeholder="예: 2026년 3월 중순" required>
+
+          <label for="requirements">상세 요청 사항 (예: 예산, 디자인 컨셉, 주요 공사 부위):</label>
+          <textarea id="requirements" name="requirements" placeholder="원하시는 인테리어 스타일(모던, 미니멀 등)이나 예산 범위, 중요하게 생각하는 공사 부위 등을 자세히 알려주세요."></textarea>
+
+          <button type="submit" class="cta-button">무료 견적 신청하기</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const expanded = dt.getAttribute('aria-expanded') === 'true' || false;
+        dt.setAttribute('aria-expanded', !expanded);
+        dt.classList.toggle('active');
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
